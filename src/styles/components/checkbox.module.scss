@@ -1,0 +1,72 @@
+.checkbox {
+    --border-default: #bbbbc1;
+    --border-hover: #9898a3;
+    --active: #6ef279;
+    --tickColor: #ffffff;
+    display: block;
+    cursor: pointer;
+    position: relative;
+    -webkit-tap-highlight-color: transparent;
+    display: flex;
+    font-size: 14px;
+    align-items: center;
+    font-weight: 200;
+
+    input {
+        display: block;
+        outline: none;
+        border: none;
+        padding: 0;
+        margin: 0;
+        -webkit-appearance: none;
+        width: 20px;
+        height: 20px;
+        border-radius: 36% / 36%;
+        box-shadow: inset 0 0 0 1.5px var(--border, var(--border-default));
+        background: var(--background, transparent);
+        transition: background .25s linear, box-shadow .25s linear;
+        margin-right: .4rem;
+        transition: .2s all linear;
+        &::after {
+            content: url("data:image/svg+xml,%3Csvg width='11' height='8' viewBox='0 0 11 8' fill='none' xmlns='http://www.w3.org/2000/svg%27%3E%3Cpath d='M1 4.27778L4.70588 7L10.5 0.5' stroke='white'/%3E%3C/svg%3E%0A");
+            width: 100%;
+            color: #fff;
+            fill: #fff;
+            max-width: 16px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0;
+            transition: .3s all linear;
+
+        }
+        &:checked {
+            --background: var(--active);
+            --border: var(--active);
+            position: relative;
+            transition: .2s all linear;
+            & + svg {
+                --stroke-dashoffset: 0;
+                & + svg {
+                    --animation: check;
+                }
+            }
+            &::after {
+                opacity: 1;
+            }
+        }
+    }
+    &:hover {
+        input {
+            &:not(:checked) {
+                --border: var(--border-hover);
+            }
+        }
+    }
+}
+
+@keyframes check {
+    100% {
+        stroke-dashoffset: 4.5px;
+    }
+}
